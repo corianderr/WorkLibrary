@@ -117,5 +117,10 @@ namespace ControlWork7.Controllers
             var book = _context.Books.FirstOrDefault(b => b.Id == bookId);
             return View(book);
         }
+        public IActionResult TakenBooks()
+        {
+            var journal = _context.Journal.Include(j => j.Book).Include(j => j.User).Where(j => j.OtputTime == null);
+            return View(journal.ToList());
+        }
     }
 }
