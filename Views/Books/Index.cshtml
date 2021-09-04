@@ -1,0 +1,30 @@
+﻿@model List<Book>
+@{
+    ViewBag.Title = "Books";
+    Layout = "_Layout";
+}
+<h2>Books</h2>
+@if (@Model.Count == 0)
+{
+    <p>Books haven't been added yet</p>
+}
+else
+{
+    <div class="row row-cols-1 row-cols-md-4 g-4">
+        @foreach (var item in @Model)
+        {
+            <div class="col">
+                <div class="card h-100">
+                    <img src="@item.Photo" class="card-img-top" alt="@item.Name">
+                    <div class="card-body">
+                        <h5 class="card-title">@item.Name</h5>
+                        <p class="card-text">Author: @item.Author<br />Status: @item.Status<br /></p>
+                        <div class="card-footer">
+                            <a class="btn btn-default btn" asp-controller="Books" asp-action="Get" asp-route-bookId="@item.Id">Details</a><br /><a class="btn btn-default btn" asp-controller="Books" asp-action="Details" asp-route-bookId="@item.Id">More info</a><br />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+}
