@@ -1,6 +1,8 @@
+using ControlWork7.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -24,6 +26,8 @@ namespace ControlWork7
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            string connection = Configuration.GetConnectionString("DefaultConnection");
+            services.AddDbContext<MobileContext>(options => options.UseNpgsql(connection));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
