@@ -1,0 +1,29 @@
+﻿@model ControlWork7.ViewModels.BookAndEmail
+@{
+    ViewBag.Title = "Get book";
+    Layout = "_Layout";
+}
+<div class="col">
+    <div class="card h-100">
+        <img src="@Model.Book.Photo" class="card-img-top" alt="@Model.Book.Name">
+        <div class="card-body">
+            <h5 class="card-title">@Model.Book.Name</h5>
+            <p class="card-text">Author: @Model.Book.Author<br />Status: @Model.Book.Status<br /></p>
+        </div>
+    </div>
+</div>
+<br />
+<div><p>You choosed a book @Model.Book.Name<br />
+    author @Model.Book.Author</p></div>
+<form asp-action="Get" asp-controller="Books" method="post">
+    <div class="form-row">
+        <label for="">
+            Enter email to get it<br />
+            <input asp-for="Email" type="text">
+        </label>
+    </div>
+    <div class="form-row">
+        <input asp-for="Book.Id" type="hidden" value="@Model.Book.Id">
+    </div>
+    <button type="submit">Get</button>
+</form>

@@ -42,12 +42,46 @@ namespace ControlWork7.Controllers
             if (book != null)
             {
                 book.AddingDate = DateTime.Now;
-                book.Status = "new";
+                book.Status = "in stock";
                 _context.Books.Add(book);
                 _context.SaveChanges();
             }
             return RedirectToAction("Index");
         }
+        public IActionResult Index1()
+        {
+            return View();
+        }
+        public IActionResult Index2()
+        {
+            return View();
+        }
 
+        public IActionResult Get(int bookId)
+        {
+            var book = _context.Books.FirstOrDefault(b => b.Id == bookId);
+            var bnm = new BookAndEmail { Book = book, Email = String.Empty };
+            return View(bnm);
+        }
+        [HttpPost]
+        public IActionResult Get(BookAndEmail bnm)
+        {
+            if (_context.Users.Any(u => u.Email == bnm.Email))
+            {
+                var userId = _context.Users.FirstOrDefault(u => u.Email == bnm.Email).Id;
+                if (_context.Journal.Where(j => j.OtputTime == null).Where(j => j.UserId == userId).ToList().Count < 3)
+                {
+                    _context.Books.FirstOrDefault(b => b.Id == bnm.Book.Id).Status = "given";
+                    Journal journal = new Journal { UserId = userId, BookId = bnm.Book.Id, InputTime = DateTime.Now };
+                    _context.Journal.Add(journal);
+                    _context.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                else
+                    return RedirectToAction("Index1");
+            }
+            else
+                return RedirectToAction("Index2");
+        }
     }
 }

@@ -27,8 +27,7 @@ namespace ControlWork7.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("~/Books/Index");
         }
-
     }
 }
