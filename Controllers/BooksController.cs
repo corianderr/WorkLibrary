@@ -1,5 +1,7 @@
 ﻿using ControlWork7.Models;
+using ControlWork7.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +17,19 @@ namespace ControlWork7.Controllers
         {
             _context = context;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index(int page = 1)
         {
-            IQueryable<Book> books = _context.Books;
-            books = books.OrderByDescending(s => s.AddingDate);
-            return View(books.ToList());
+            int pageSize = 8;
+            IQueryable<Book> source = _context.Books.OrderByDescending(s => s.AddingDate);
+            var count = await source.CountAsync();
+            var items = await source.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync();
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            IndexViewModel viewModel = new IndexViewModel
+            {
+                PageViewModel = pageViewModel,
+                Books = items
+            };
+            return View(viewModel);
         }
         public IActionResult Create()
         {
