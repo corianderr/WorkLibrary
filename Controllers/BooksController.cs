@@ -12,7 +12,6 @@ namespace ControlWork7.Controllers
     public class BooksController : Controller
     {
         private MobileContext _context;
-
         public BooksController(MobileContext context)
         {
             _context = context;
@@ -79,6 +78,28 @@ namespace ControlWork7.Controllers
                 }
                 else
                     return RedirectToAction("Index1");
+            }
+            else
+                return RedirectToAction("Index2");
+        }
+        public IActionResult Email()
+        {
+            return View(new User());
+        }
+        [HttpPost]
+        public IActionResult Email(User user)
+        {
+            if (_context.Users.Any(u => u.Email == user.Email))
+            {
+                var books = new List<Book>();
+                var user1 = _context.Users.FirstOrDefault(u => u.Email == user.Email);
+                var journal = _context.Journal.Include(j => j.Book).Include(j => j.User).Where(j => j.OtputTime == null).Where(j => j.UserId == user1.Id).ToList();
+                foreach (var item in journal)
+                {
+                    var book = item.Book;
+                    books.Add(book);
+                }
+                return View("PersonalArea", books);
             }
             else
                 return RedirectToAction("Index2");

@@ -1,0 +1,14 @@
+﻿@model User
+@{
+    ViewBag.Title = "Email";
+    Layout = "_Layout";
+}
+<form asp-action="Email" asp-controller="Books" method="post">
+    <div class="form-row">
+        <label for="">
+            Enter email<br />
+            <input asp-for="Email" type="text">
+        </label>
+    </div>
+    <button type="submit">Get</button>
+</form>
