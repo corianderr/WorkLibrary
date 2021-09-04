@@ -1,0 +1,21 @@
+﻿@model Category
+@{
+    ViewBag.Title = "Add category";
+    Layout = "_Layout";
+}
+<h2>Fill form for adding new category</h2>
+<div asp-validation-summary="ModelOnly"></div>
+<div class="row">
+    <div class="category_add_form col-md-6">
+        <form asp-action="Add" asp-controller="Categories" method="post">
+            <div class="form_row">
+                <label for="">
+                    Name
+                    <input asp-for="Name" type="text">
+                </label>
+                <span asp-validation-for="Name"></span>
+            </div>
+            <button type="submit">Add</button>
+        </form>
+    </div>
+</div>

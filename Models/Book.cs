@@ -21,5 +21,7 @@ namespace ControlWork7.Models
         public string Description { get; set; }
         public DateTime AddingDate { get; set; }
         public string Status { get; set; }
+        public int? CategoryId { get; set; }
+        public Category? Category { get; set; }
     }
 }

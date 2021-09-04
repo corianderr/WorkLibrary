@@ -1,4 +1,4 @@
-﻿@model Book
+﻿@model ControlWork7.ViewModels.BookCategoryViewModel
 @{
     ViewBag.Title = "Add book";
     Layout = "_Layout";
@@ -11,38 +11,52 @@
             <div class="form-row">
                 <label for="">
                     Book's name
-                    <input asp-for="Name" type="text">
+                    <input asp-for="Book.Name" type="text">
                 </label>
-                <span asp-validation-for="Name"></span>
+                <span asp-validation-for="Book.Name"></span>
             </div>
             <div class="form-row">
                 <label for="">
                     Author's name
-                    <input asp-for="Author" type="text">
+                    <input asp-for="Book.Author" type="text">
                 </label>
-                <span asp-validation-for="Author"></span>
+                <span asp-validation-for="Book.Author"></span>
             </div>
             <div class="form-row">
                 <label for="">
                     Year of release
-                    <input asp-for="ReleaseYear" type="text">
+                    <input asp-for="Book.ReleaseYear" type="text">
                 </label>
-                <span asp-validation-for="ReleaseYear"></span>
+                <span asp-validation-for="Book.ReleaseYear"></span>
             </div>
             <div class="form-row">
                 <label for="">
                     Description
-                    <input asp-for="Description" type="text">
+                    <input asp-for="Book.Description" type="text">
                 </label>
-                <span asp-validation-for="Description"></span>
+                <span asp-validation-for="Book.Description"></span>
             </div>
             <div class="form-row">
                 <label for="">
                     Photo url or name in 'books' folder
-                    <input asp-for="Photo" type="text">
+                    <input asp-for="Book.Photo" type="text">
                 </label>
-                <span asp-validation-for="Photo"></span>
+                <span asp-validation-for="Book.Photo"></span>
             </div>
+            @if (Model.Categories.Count != 0)
+            {
+                <div class="form_row">
+                    <label for="">
+                        Category
+                        <select asp-for="Book.CategoryId">
+                            @foreach (var item in @Model.Categories)
+                            {
+                                <option value="@item.Id">@item.Name</option>
+                            }
+                        </select>
+                    </label>
+                </div>
+            }
             <button type="submit">Add</button>
         </form>
     </div>

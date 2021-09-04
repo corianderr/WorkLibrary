@@ -32,7 +32,9 @@ namespace ControlWork7.Controllers
         }
         public IActionResult Create()
         {
-            return View();
+            var categories = _context.Categories.ToList();
+            var bnc = new BookCategoryViewModel { Categories = categories, Book = new Book() };
+            return View(bnc);
         }
 
         [HttpPost]
@@ -118,7 +120,7 @@ namespace ControlWork7.Controllers
         }
         public IActionResult Details(int bookId)
         {
-            var book = _context.Books.FirstOrDefault(b => b.Id == bookId);
+            var book = _context.Books.Include(b => b.Category).FirstOrDefault(b => b.Id == bookId);
             return View(book);
         }
         public IActionResult TakenBooks()
