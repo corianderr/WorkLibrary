@@ -22,12 +22,16 @@ namespace ControlWork7.Controllers
         [HttpPost]
         public IActionResult Create(User user)
         {
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                _context.Users.Add(user);
-                _context.SaveChanges();
+                if (user != null)
+                {
+                    _context.Users.Add(user);
+                    _context.SaveChanges();
+                }
+                return RedirectToAction("Index", "Books");
             }
-            return RedirectToAction("~/Books/Index");
+            return View();
         }
     }
 }
