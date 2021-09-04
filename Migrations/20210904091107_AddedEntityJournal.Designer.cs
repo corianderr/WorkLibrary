@@ -3,15 +3,17 @@ using System;
 using ControlWork7.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace ControlWork7.Migrations
 {
     [DbContext(typeof(MobileContext))]
-    partial class MobileContextModelSnapshot : ModelSnapshot
+    [Migration("20210904091107_AddedEntityJournal")]
+    partial class AddedEntityJournal
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -65,7 +67,7 @@ namespace ControlWork7.Migrations
                     b.Property<DateTime>("InputTime")
                         .HasColumnType("timestamp without time zone");
 
-                    b.Property<DateTime?>("OtputTime")
+                    b.Property<DateTime>("OtputTime")
                         .HasColumnType("timestamp without time zone");
 
                     b.Property<int>("UserId")

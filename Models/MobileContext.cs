@@ -10,6 +10,7 @@ namespace ControlWork7.Models
     {
         public DbSet<Book> Books { get; set; }
         public DbSet<User> Users { get; set; }
+        public DbSet<Journal> Journal { get; set; }
         public MobileContext(DbContextOptions<MobileContext> options) : base(options) { }
     }
 }
