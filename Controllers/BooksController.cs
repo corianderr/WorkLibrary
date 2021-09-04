@@ -104,5 +104,13 @@ namespace ControlWork7.Controllers
             else
                 return RedirectToAction("Index2");
         }
+        public IActionResult Return(int bookId)
+        {
+            var book = _context.Books.FirstOrDefault(b => b.Id == bookId);
+            book.Status = "in stock";
+            _context.Journal.Where(j => j.BookId == bookId).FirstOrDefault(j => j.OtputTime == null).OtputTime = DateTime.Now;
+            _context.SaveChanges();
+            return RedirectToAction("Index");
+        }
     }
 }
