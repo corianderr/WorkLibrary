@@ -1,0 +1,14 @@
+﻿@model Book
+@{
+    ViewBag.Title = Model.Name;
+    Layout = "_Layout";
+}
+<div align="center"><img src="@Model.Photo" class="card-img-top" alt="@Model.Name"></div>
+<h2 >Details:</h2>
+<div >
+    Name - @Model.Name<br />
+    Author - @Model.Author<br />
+    Year of publishing - @Model.ReleaseYear<br />
+    Description:<br /> @Model.Description<br />
+    Status - @Model.Status<br />
+</div>

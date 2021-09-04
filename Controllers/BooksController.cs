@@ -112,5 +112,10 @@ namespace ControlWork7.Controllers
             _context.SaveChanges();
             return RedirectToAction("Index");
         }
+        public IActionResult Details(int bookId)
+        {
+            var book = _context.Books.FirstOrDefault(b => b.Id == bookId);
+            return View(book);
+        }
     }
 }
