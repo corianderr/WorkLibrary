@@ -1,0 +1,36 @@
+﻿@model User
+@{
+    ViewBag.Title = "Registration";
+    Layout = "_Layout";
+}
+<h2>Fill the form</h2>
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create" asp-controller="Users" method="post">
+            <div class="form-row">
+                <label for="">
+                    Name
+                    <input asp-for="Name" type="text">
+                </label>
+            </div>
+            <div class="form-row">
+                <label for="">
+                    Surname
+                    <input asp-for="Surname" type="text">
+                </label>
+            </div>
+            <div class="form-row">
+                <label for="">
+                    Email
+                    <input asp-for="Email" type="text">
+                </label>
+            </div>
+            <div class="form-row">
+                <label for="">
+                    Phone
+                    <input asp-for="Phone" type="text">
+                </label>
+            </div>
+            <button type="submit">Sign up</button>
+        </form>
+    </div>
