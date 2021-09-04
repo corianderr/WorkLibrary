@@ -38,14 +38,18 @@ namespace ControlWork7.Controllers
         [HttpPost]
         public IActionResult Create(Book book)
         {
-            if (book != null)
+            if (ModelState.IsValid)
             {
-                book.AddingDate = DateTime.Now;
-                book.Status = "in stock";
-                _context.Books.Add(book);
-                _context.SaveChanges();
+                if (book != null)
+                {
+                    book.AddingDate = DateTime.Now;
+                    book.Status = "in stock";
+                    _context.Books.Add(book);
+                    _context.SaveChanges();
+                }
+                return RedirectToAction("Index");
             }
-            return RedirectToAction("Index");
+            return View();
         }
         public IActionResult Index1()
         {

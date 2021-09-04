@@ -4,6 +4,7 @@
     Layout = "_Layout";
 }
 <h2>Fill the form</h2>
+<div asp-validation-summary="ModelOnly"></div>
 <div class="row">
     <div class="col-md-6">
         <form asp-action="Create" asp-controller="Books" method="post">
@@ -12,30 +13,35 @@
                     Book's name
                     <input asp-for="Name" type="text">
                 </label>
+                <span asp-validation-for="Name"></span>
             </div>
             <div class="form-row">
                 <label for="">
                     Author's name
                     <input asp-for="Author" type="text">
                 </label>
+                <span asp-validation-for="Author"></span>
             </div>
             <div class="form-row">
                 <label for="">
                     Year of release
                     <input asp-for="ReleaseYear" type="text">
                 </label>
+                <span asp-validation-for="ReleaseYear"></span>
             </div>
             <div class="form-row">
                 <label for="">
                     Description
                     <input asp-for="Description" type="text">
                 </label>
+                <span asp-validation-for="Description"></span>
             </div>
             <div class="form-row">
                 <label for="">
                     Photo url or name in 'books' folder
                     <input asp-for="Photo" type="text">
                 </label>
+                <span asp-validation-for="Photo"></span>
             </div>
             <button type="submit">Add</button>
         </form>
